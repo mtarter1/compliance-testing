@@ -7,6 +7,8 @@ The live website is a static multi-page site hosted through GitHub Pages. There 
 - Routine copy can be updated in the relevant HTML page in this repository.
 - The homepage is `index.html`; shared design rules are in `site.css`.
 - Service pages are in `services/`; customer-segment pages are in `solutions/`.
+- Article pages are in `articles/`; complete FAQs are in `faq.html`.
+- Existing and remote image references are documented in `ASSET-INVENTORY.md`.
 - Review desktop and mobile layouts before merging changes into `main`.
 - Ask the site owner or developer for structural, styling, domain, analytics, or form-routing changes.
 
