@@ -2,11 +2,12 @@
 
 ## Day-to-day content workflow
 
-The live website is a static export from Webstudio. There is no CMS or database to maintain.
+The live website is a static multi-page site hosted through GitHub Pages. There is no CMS or database to maintain.
 
-- Use Webstudio for visual content edits.
-- Publish the project in Webstudio after reviewing desktop and mobile previews.
-- Export the published site and replace the generated files in this repository when GitHub Pages needs to match Webstudio.
+- Routine copy can be updated in the relevant HTML page in this repository.
+- The homepage is `index.html`; shared design rules are in `site.css`.
+- Service pages are in `services/`; customer-segment pages are in `solutions/`.
+- Review desktop and mobile layouts before merging changes into `main`.
 - Ask the site owner or developer for structural, styling, domain, analytics, or form-routing changes.
 
 ## Safe content edits
@@ -25,7 +26,7 @@ Avoid changing:
 - Form action URLs or hidden form fields
 - DNS, CNAME, or GitHub Pages settings
 - Generated JavaScript and CSS files in `assets/`
-- Webstudio project IDs or publishing configuration
+- Shared styles or scripts unless the change has been reviewed on every page
 
 ## Contact form
 
@@ -46,4 +47,4 @@ The form includes required contact fields, a honeypot field, and FormSubmit's CA
 
 ## Support boundary
 
-Content staff should not need GitHub, DNS, hosting, or backend access for routine updates. Escalate technical changes to the site owner or developer.
+Content staff should not need DNS, hosting, or backend access for routine updates. Escalate technical changes to the site owner or developer.
