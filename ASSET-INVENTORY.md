@@ -10,7 +10,7 @@ No files in the existing `assets/` directory were removed during the site refres
 
 ## Reused original site images
 
-- Independent-owner image: not yet supplied; the layout keeps an intentional placeholder.
+- Independent-owner image: `https://fastlabsio.retool.com/api/file/32608b75-9224-41d9-bf92-3409ffcebe16`
 - Growing-portfolio image: `https://fastlabsio.retool.com/api/file/373ce81e-5abb-4638-8caa-eb99cf7a9167`
 - Critical-fueling image: `https://fastlabsio.retool.com/api/file/abe708a4-719d-478b-b99b-9dab35b9d1ea`
 - Veeder-Root article image: `https://fastlabsio.retool.com/api/file/c18ba9b4-3cd0-4f1f-b939-0739cfc112f3`
