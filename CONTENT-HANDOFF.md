@@ -32,7 +32,7 @@ Avoid changing:
 
 ## Contact form
 
-Requests are sent through FormSubmit to `ctsschedule4@gmail.com`.
+Requests are sent through FormSubmit to `contact@compliance-testing.com`.
 
 After the first submission following deployment, open the FormSubmit activation email in that inbox and approve the form. FormSubmit retains submissions made before activation for a limited period.
 
@@ -43,7 +43,7 @@ The form includes required contact fields, a honeypot field, and FormSubmit's CA
 1. Confirm phone, email, and address details.
 2. Test navigation links.
 3. Submit one test request using the published site.
-4. Confirm the request arrives at `ctsschedule4@gmail.com`.
+4. Confirm the request arrives at `contact@compliance-testing.com`.
 5. Check the page on desktop and mobile.
 6. Confirm the footer year and article dates are current.
 
