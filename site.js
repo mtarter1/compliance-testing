@@ -40,8 +40,10 @@
 })(document, window.posthog || []);
 
 posthog.init('phc_CHFUtFcUJoQ5n8txL8B3PsK6N7Vi3DeAdi83qqkRBPjr', {
-  api_host: 'https://us.i.posthog.com',
+  api_host: 'https://t.compliance-testing.com',
+  ui_host: 'https://us.posthog.com',
   defaults: '2026-05-30',
+  person_profiles: 'identified_only',
 });
 
 const menuButton = document.querySelector('.menu-toggle');
