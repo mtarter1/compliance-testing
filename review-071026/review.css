@@ -59,6 +59,107 @@
   border-color: rgba(84, 230, 165, .7);
 }
 
+/* Review-only CTS brand system: stronger mark, signature accent, and quiet logo watermarks. */
+.site-header {
+  border-bottom: 3px solid var(--green);
+}
+
+.site-header .nav-wrap {
+  min-height: 82px;
+}
+
+.site-header .brand img {
+  flex-basis: 132px;
+  width: 132px;
+  height: 58px;
+}
+
+.site-header .brand {
+  position: relative;
+}
+
+.site-header .brand::after {
+  content: "Compliance expertise | Northeast coverage";
+  padding-left: 13px;
+  border-left: 1px solid #bdeedb;
+  color: #176743;
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .045em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.hero,
+.review-article-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero::after,
+.review-article-hero::after {
+  position: absolute;
+  z-index: 0;
+  width: 320px;
+  height: 160px;
+  right: 10%;
+  top: 24%;
+  background: url("https://fastlabsio.retool.com/api/file/31343347-812d-4fd2-a0d9-3624b18244a9") center / contain no-repeat;
+  content: "";
+  filter: grayscale(1) contrast(1.25);
+  opacity: .055;
+}
+
+.hero > .container,
+.review-article-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.review-article-hero::after {
+  filter: brightness(0) invert(1);
+  opacity: .07;
+}
+
+.section-heading h2,
+.review-article-body h2 {
+  position: relative;
+}
+
+.section-heading h2::before,
+.review-article-body h2::before {
+  display: inline-block;
+  width: 26px;
+  height: 4px;
+  margin: 0 11px 8px 0;
+  border-radius: 99px;
+  background: var(--green);
+  content: "";
+}
+
+.navy .section-heading h2::before { background: var(--green); }
+
+.review-article-aside::before {
+  display: block;
+  width: 118px;
+  height: 44px;
+  margin-bottom: 18px;
+  background: url("https://fastlabsio.retool.com/api/file/31343347-812d-4fd2-a0d9-3624b18244a9") left center / contain no-repeat;
+  content: "";
+}
+
+.site-footer .container::before {
+  display: block;
+  width: 185px;
+  height: 62px;
+  margin-bottom: 26px;
+  background: url("https://fastlabsio.retool.com/api/file/31343347-812d-4fd2-a0d9-3624b18244a9") left center / contain no-repeat;
+  content: "";
+  filter: brightness(0) invert(1) sepia(.2) saturate(1.2);
+  opacity: .96;
+}
+
 /* Employee-only article preview pages. */
 .review-article-hero {
   padding: 58px 0 46px;
@@ -575,6 +676,10 @@
   .review-article-body { font-size: 1rem; }
   .review-article-body h2 { margin-top: 36px; }
   .review-contact-strip { align-items: flex-start; flex-direction: column; }
+  .site-header .nav-wrap { min-height: 68px; }
+  .site-header .brand img { flex-basis: 108px; width: 108px; height: 46px; }
+  .site-header .brand::after { display: none; }
+  .hero::after, .review-article-hero::after { width: 220px; right: -35px; opacity: .045; }
 
   .process-step {
     min-height: 0;
