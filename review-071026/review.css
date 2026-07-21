@@ -498,6 +498,30 @@
   line-height: 1.28;
 }
 
+/* Give the homepage industry list the same selectable, explanatory pattern as the customer-site audience tool. */
+.review-industry-tabs {
+  margin-top: 18px;
+}
+
+.review-industry-tabs .tab-panel {
+  min-height: 260px;
+  background: radial-gradient(circle at 88% 18%, rgba(97, 220, 164, .17), transparent 28%), linear-gradient(135deg, #0e4b34, var(--navy));
+}
+
+.review-industry-tabs .eyebrow {
+  display: block;
+  color: var(--green);
+}
+
+.review-industry-tabs .tag-list {
+  margin-top: 24px;
+}
+
+.review-industry-tabs .tag-list span {
+  border-color: rgba(255, 255, 255, .22);
+  color: #d6eee1;
+}
+
 /* Give the About-page invitation a deliberate, balanced call-to-action shape. */
 .cta-strip {
   display: grid;
