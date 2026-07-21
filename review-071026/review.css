@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 0.4 seconds
+Output:
 .review-banner {
   position: sticky;
   top: 79px;
@@ -43,11 +46,38 @@
 }
 
 .review-intro-grid,
-.review-values-grid,
+.review-values-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
 .review-services-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
+}
+
+/* The main headings carry the message more clearly than repeated micro-labels. */
+.section .eyebrow,
+.review-service-header .eyebrow {
+  display: none;
+}
+
+.section.compact {
+  padding: 38px 0;
+}
+
+.stats {
+  padding-bottom: 22px;
+}
+
+.section-heading {
+  margin-bottom: 24px;
+}
+
+.section-heading p {
+  margin-top: 14px;
 }
 
 .review-copy-card,
@@ -70,6 +100,14 @@
 .review-service p {
   margin: 0;
   color: var(--muted);
+}
+
+.review-intro-grid > :last-child,
+.review-values-grid > :last-child,
+.review-resources > :last-child {
+  grid-column: 1 / -1;
+  width: min(100%, calc(50% - 9px));
+  justify-self: center;
 }
 
 .review-service {
@@ -126,6 +164,10 @@
   font-weight: 700;
 }
 
+.navy .section-heading p {
+  color: #dbe4f6;
+}
+
 .review-resources {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -149,13 +191,124 @@
   color: var(--muted);
 }
 
+/* A quieter, more scannable alternative to the original numbered process grid. */
+.process-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  border-radius: 0;
+  overflow: visible;
+  background: transparent;
+}
+
+.process-step {
+  position: relative;
+  min-height: 174px;
+  padding: 26px 26px 24px 82px;
+  border: 1px solid rgba(255, 255, 255, .17);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .055);
+}
+
+.process-step b {
+  position: absolute;
+  top: 25px;
+  left: 24px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(84, 230, 165, .48);
+  border-radius: 50%;
+  color: var(--green);
+  font-size: .8rem;
+  letter-spacing: .04em;
+}
+
+.process-step h3 {
+  margin: 0 0 9px;
+  font-size: 1.18rem;
+}
+
+.process-step p {
+  color: #d7e0f2;
+}
+
+/* Industries read as a tidy directory instead of scattered numbered labels. */
+.facility-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.facility {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+}
+
+.facility-grid span {
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .06em;
+}
+
+.facility b {
+  color: var(--navy);
+  font-size: .98rem;
+  line-height: 1.28;
+}
+
+/* Give the About-page invitation a deliberate, balanced call-to-action shape. */
+.cta-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 34px;
+  margin-top: 18px;
+  padding: 34px;
+  border: 1px solid rgba(84, 230, 165, .28);
+  background: linear-gradient(135deg, #102c67, var(--navy));
+}
+
+.cta-strip h2 {
+  color: var(--white);
+}
+
+.cta-strip .button {
+  justify-self: end;
+}
+
+.contact-list .button {
+  grid-column: 1 / -1;
+  width: fit-content;
+  justify-self: center;
+}
+
 @media (max-width: 900px) {
   .review-intro-grid,
   .review-values-grid,
-  .review-services-grid,
   .review-proof-list,
   .review-resources {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .review-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .facility-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -184,4 +337,31 @@
   .review-service-points {
     grid-template-columns: 1fr;
   }
+
+  .review-intro-grid > :last-child,
+  .review-values-grid > :last-child,
+  .review-resources > :last-child {
+    grid-column: auto;
+    width: auto;
+  }
+
+  .process-grid,
+  .facility-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-step {
+    min-height: 0;
+  }
+
+  .cta-strip {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 26px;
+  }
+
+  .cta-strip .button {
+    justify-self: start;
+  }
 }
+
