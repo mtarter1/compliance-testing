@@ -8,7 +8,7 @@
   <meta name="description" content="Internal review of proposed Compliance Testing Services website content.">
   <link rel="icon" href="https://fastlabsio.retool.com/api/file/31343347-812d-4fd2-a0d9-3624b18244a9">
   <link rel="stylesheet" href="/site.css">
-  <link rel="stylesheet" href="/review-071026/review.css?v=review-green-v2">
+  <link rel="stylesheet" href="/review-071026/review.css?v=review-green-v5">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -121,13 +121,39 @@
     <section class="section compact surface">
       <div class="container">
         <div class="section-heading"><div><p class="eyebrow">Industries we serve</p><h2>Compliance support for varied operating environments.</h2></div></div>
-        <div class="facility-grid">
-          <div class="facility"><span>01</span><b>Convenience stores</b></div>
-          <div class="facility"><span>02</span><b>Fueling stations</b></div>
-          <div class="facility"><span>03</span><b>Commercial properties</b></div>
-          <div class="facility"><span>04</span><b>Industrial facilities</b></div>
-          <div class="facility"><span>05</span><b>Municipal &amp; government facilities</b></div>
-          <div class="facility"><span>06</span><b>Multi-site businesses</b></div>
+        <div class="tab-set review-industry-tabs" data-tabs>
+          <div class="tab-list" role="tablist" aria-label="Operating environments">
+            <button class="tab-button" type="button" role="tab" id="retail-review-tab" aria-controls="retail-review-panel" aria-selected="true">Retail &amp; fueling</button>
+            <button class="tab-button" type="button" role="tab" id="municipal-review-tab" aria-controls="municipal-review-panel" aria-selected="false">Municipal operations</button>
+            <button class="tab-button" type="button" role="tab" id="commercial-review-tab" aria-controls="commercial-review-panel" aria-selected="false">Commercial &amp; industrial</button>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="retail-review-panel" aria-labelledby="retail-review-tab">
+            <div class="review-industry-panel-copy">
+              <p class="eyebrow">Customer-facing sites</p>
+              <h3>Retail and fueling operations</h3>
+              <p>Keep equipment, records, inspections, and repairs coordinated across convenience stores and fueling stations—without disrupting day-to-day business.</p>
+              <div class="tag-list"><span>Convenience stores</span><span>Fueling stations</span><span>Retail locations</span><span>Forecourt equipment</span></div>
+            </div>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="municipal-review-panel" aria-labelledby="municipal-review-tab" hidden>
+            <div class="review-industry-panel-copy">
+              <p class="eyebrow">Essential services</p>
+              <h3>Municipal and government facilities</h3>
+              <p>Plan dependable compliance support around fleets, public works, critical operations, and the documentation requirements that keep essential services moving.</p>
+              <div class="tag-list"><span>Public works</span><span>Municipal fleets</span><span>Government facilities</span><span>Due-date planning</span></div>
+            </div>
+          </div>
+
+          <div class="tab-panel" role="tabpanel" id="commercial-review-panel" aria-labelledby="commercial-review-tab" hidden>
+            <div class="review-industry-panel-copy">
+              <p class="eyebrow">Complex portfolios</p>
+              <h3>Commercial and industrial sites</h3>
+              <p>Coordinate inspections, testing, repairs, and reporting across commercial properties, industrial facilities, and multi-site operations.</p>
+              <div class="tag-list"><span>Commercial properties</span><span>Industrial facilities</span><span>Multi-site businesses</span><span>Portfolio coordination</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
