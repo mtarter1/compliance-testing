@@ -24,12 +24,34 @@
 
 .review-banner-inner {
   width: var(--page);
-  min-height: 48px;
+  min-height: 52px;
   margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+}
+
+.review-banner-title {
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+}
+
+.review-company-name {
+  color: var(--logo-green);
+  font-size: .93rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.review-status {
+  color: #557066;
+  font-size: .66rem;
+  font-weight: 750;
+  letter-spacing: .065em;
+  text-transform: uppercase;
 }
 
 /* Keep the hero's inset explicitly aligned with every review-page section. */
@@ -549,6 +571,12 @@
     flex-direction: column;
     gap: 7px;
     padding: 10px 0;
+  }
+
+  .review-banner-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .review-nav {
