@@ -20,6 +20,7 @@
 
 .page-hero .lede { color: #d6eee1; }
 .page-hero .breadcrumb { color: #b9dccc; }
+.page-hero .eyebrow { color: var(--white); }
 
 .review-banner {
   position: sticky;
@@ -506,11 +507,18 @@
   margin-top: 18px;
   padding: 34px;
   border: 1px solid rgba(84, 230, 165, .28);
-  background: linear-gradient(135deg, #102c67, var(--navy));
+  background: radial-gradient(circle at 88% 20%, rgba(97, 220, 164, .18), transparent 35%), linear-gradient(135deg, #0e4b34, var(--navy));
 }
 
 .cta-strip h2 {
   color: var(--white);
+}
+
+.cta-strip p { color: #d6eee1; }
+
+.cta-strip .button {
+  background: var(--green);
+  color: var(--navy);
 }
 
 .cta-strip .button {
@@ -547,6 +555,11 @@
   white-space: nowrap;
   font-size: .88rem;
   letter-spacing: -.02em;
+}
+
+.site-footer {
+  background: #0a2c20;
+  color: #d6eee1;
 }
 
 @media (max-width: 900px) {
