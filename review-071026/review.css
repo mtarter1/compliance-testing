@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 0.4 seconds
-Output:
 .review-banner {
   position: sticky;
   top: 79px;
@@ -191,6 +188,35 @@ Output:
   color: var(--muted);
 }
 
+/* Keep the proposed-resource ideas compact and balanced as one set. */
+.review-resources {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.review-resources > :last-child {
+  grid-column: auto;
+  width: auto;
+  justify-self: stretch;
+}
+
+.review-resource {
+  position: relative;
+  min-height: 0;
+  padding: 24px 22px 22px;
+  border-radius: 14px;
+}
+
+.review-resource::before {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--blue);
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .08em;
+  content: "GUIDE";
+}
+
 /* A quieter, more scannable alternative to the original numbered process grid. */
 .process-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -235,37 +261,40 @@ Output:
 
 /* Industries read as a tidy directory instead of scattered numbered labels. */
 .facility-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
 }
 
 .facility {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 68px;
-  padding: 16px 18px;
+  min-height: 78px;
+  padding: 18px 22px;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--white);
 }
 
+.facility::before {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 0;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--green);
+  content: "";
+}
+
 .facility-grid span {
-  flex: 0 0 auto;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  color: var(--blue);
-  font-size: .72rem;
-  font-weight: 850;
-  letter-spacing: .06em;
+  display: none;
 }
 
 .facility b {
   color: var(--navy);
-  font-size: .98rem;
+  font-size: 1.02rem;
   line-height: 1.28;
 }
 
@@ -295,11 +324,36 @@ Output:
   justify-self: center;
 }
 
+/* Bring the final contact block together without the large visual gap. */
+.contact-grid {
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.contact-grid > div:first-child {
+  padding-top: 0;
+}
+
+.contact-list {
+  margin-top: 0;
+}
+
+/* Three footer columns give the contact address enough room to stay intact. */
+.footer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.site-footer a[href^="mailto:"] {
+  white-space: nowrap;
+  font-size: .88rem;
+  letter-spacing: -.02em;
+}
+
 @media (max-width: 900px) {
   .review-intro-grid,
   .review-values-grid,
-  .review-proof-list,
-  .review-resources {
+  .review-proof-list {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -338,6 +392,10 @@ Output:
     grid-template-columns: 1fr;
   }
 
+  .review-resources {
+    grid-template-columns: 1fr;
+  }
+
   .review-intro-grid > :last-child,
   .review-values-grid > :last-child,
   .review-resources > :last-child {
@@ -347,6 +405,10 @@ Output:
 
   .process-grid,
   .facility-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
     grid-template-columns: 1fr;
   }
 
@@ -364,4 +426,3 @@ Output:
     justify-self: start;
   }
 }
-
