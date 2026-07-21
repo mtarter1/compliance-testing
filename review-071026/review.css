@@ -1,9 +1,24 @@
+/* Employee-review palette: CTS green leads; blue is removed from the visual system. */
+:root {
+  --navy: #103b2b;
+  --blue: #147a54;
+  --blue-deep: #0b5c3d;
+  --green: #61dca4;
+  --logo-green: #0b7445;
+  --green-soft: #eaf7ef;
+  --ink: #17382b;
+  --muted: #5c746a;
+  --line: #d5e5db;
+  --surface: #f3f8f4;
+  --shadow: 0 22px 60px rgba(12, 74, 47, .13);
+}
+
 .review-banner {
   position: sticky;
   top: 79px;
   z-index: 24;
-  border-bottom: 1px solid #b7c0da;
-  background: #fff8d9;
+  border-bottom: 1px solid #c8dfd0;
+  background: #f7fcf8;
   color: var(--navy);
 }
 
@@ -33,7 +48,7 @@
   padding: 13px 14px;
   border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 11px;
-  background: rgba(4, 17, 55, .24);
+  background: rgba(8, 74, 47, .28);
 }
 
 .brand-panel-insight span {
@@ -51,7 +66,7 @@
 }
 
 .brand-panel-insight small {
-  color: #dbe4f6;
+  color: #d6eee1;
   font-size: .72rem;
 }
 
@@ -62,7 +77,7 @@
 /* Employee-only article preview pages. */
 .review-article-hero {
   padding: 58px 0 46px;
-  background: radial-gradient(circle at 86% 18%, rgba(84, 230, 165, .18), transparent 25%), linear-gradient(135deg, var(--navy), #142878);
+  background: radial-gradient(circle at 86% 18%, rgba(97, 220, 164, .24), transparent 25%), linear-gradient(135deg, #0e4b34, var(--navy));
   color: var(--white);
 }
 
@@ -92,7 +107,7 @@
 .review-article-lede {
   max-width: 680px;
   margin: 18px 0 0;
-  color: #dbe4f6;
+  color: #d6eee1;
   font-size: 1.1rem;
 }
 
@@ -106,7 +121,7 @@
 }
 
 .review-article-body {
-  color: #263657;
+  color: #294a3d;
   font-size: 1.06rem;
   line-height: 1.72;
 }
@@ -169,7 +184,7 @@
 }
 
 .review-contact-strip h2 { margin: 0; }
-.review-contact-strip p { max-width: 760px; margin: 12px 0 0; color: #dbe4f6; }
+.review-contact-strip p { max-width: 760px; margin: 12px 0 0; color: #d6eee1; }
 
 .review-banner strong {
   font-size: .82rem;
@@ -316,7 +331,7 @@
 }
 
 .navy .section-heading p {
-  color: #dbe4f6;
+  color: #d6eee1;
 }
 
 .review-resources {
