@@ -25,7 +25,7 @@
 /* Match the Services hero copy inset to the content cards below it. */
 .services-review > .page-hero > .container {
   box-sizing: border-box;
-  padding-inline: 38px;
+  padding-inline: 30px;
 }
 
 /* Keep the About review page aligned with its full-width content sections. */
