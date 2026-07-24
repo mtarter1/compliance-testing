@@ -338,6 +338,8 @@
 
 .review-service-header h2 a { color: inherit; text-decoration: none; }
 .review-service-header h2 a:hover { color: var(--logo-green); text-decoration: underline; }
+.service-feature h3 a { color: inherit; text-decoration: none; }
+.service-feature h3 a:hover { color: var(--logo-green); text-decoration: underline; }
 
 .review-service-header .eyebrow {
   margin-bottom: 8px;
