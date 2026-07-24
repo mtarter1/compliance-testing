@@ -22,6 +22,12 @@
 .page-hero .breadcrumb { color: #b9dccc; }
 .page-hero .eyebrow { color: var(--white); }
 
+/* Match the Services hero copy inset to the content cards below it. */
+.services-review > .page-hero > .container {
+  box-sizing: border-box;
+  padding-inline: 38px;
+}
+
 /* Keep the About review page aligned with its full-width content sections. */
 @media (min-width: 681px) {
   .about-review .section.compact > .container > h2,
