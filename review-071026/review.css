@@ -25,6 +25,7 @@
 /* Match the Services hero copy inset to the content cards below it. */
 .services-review > .page-hero > .container {
   box-sizing: border-box;
+  max-width: none;
   padding-inline: 30px;
 }
 
