@@ -280,34 +280,6 @@
   padding-bottom: 22px;
 }
 
-/* Review-only service-area visual: a quiet regional cue beside CTS's proof points. */
-.stats-review-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 270px;
-  align-items: stretch;
-  gap: 18px;
-}
-
-.service-area-map {
-  display: grid;
-  align-content: center;
-  margin: 0;
-  padding: 20px 22px 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: radial-gradient(circle at 83% 16%, rgba(97, 220, 164, .23), transparent 34%), var(--green-soft);
-}
-
-.service-area-map figcaption { display: grid; gap: 3px; }
-.service-area-map figcaption span { color: var(--blue); font-size: .68rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
-.service-area-map figcaption strong { color: var(--ink); font-size: 1.05rem; }
-.service-area-map svg { width: 100%; max-height: 166px; margin: 8px 0 2px; }
-.service-area-map .map-state { fill: var(--blue); stroke: var(--white); stroke-width: 3; stroke-linejoin: round; }
-.service-area-map .map-state:hover { fill: var(--logo-green); }
-.service-area-map text { fill: var(--white); font-family: inherit; font-size: 13px; font-weight: 850; letter-spacing: .03em; text-anchor: middle; }
-.service-area-map .map-line { fill: none; stroke: rgba(23, 56, 43, .18); stroke-width: 1.5; }
-.service-area-map p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.35; }
-
 .section-heading {
   margin-bottom: 24px;
 }
@@ -669,8 +641,6 @@
   }
 
   .review-links-grid { grid-template-columns: 1fr; }
-  .stats-review-layout { grid-template-columns: 1fr; }
-  .service-area-map { min-height: 0; }
   .review-checklist-layout { grid-template-columns: 1fr; }
   .review-checklist-intro, .review-checklist-card-wide { grid-column: auto; }
 
