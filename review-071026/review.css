@@ -610,6 +610,16 @@
 .review-link-card { padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: var(--white); box-shadow: 0 12px 30px rgba(12,74,47,.06); }
 .review-link-card h2 { margin: 0 0 8px; color: var(--ink); font-size: 1.45rem; }
 .review-link-card > p { margin: 0 0 20px; color: var(--muted); }
+.review-checklist-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.review-checklist-intro, .review-checklist-card { padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+.review-checklist-intro { grid-column: 1 / -1; }
+.review-checklist-intro h2, .review-checklist-card h2 { margin: 0 0 10px; color: var(--ink); font-size: 1.45rem; }
+.review-checklist-intro p { margin: 0; color: var(--muted); }
+.review-checklist-intro p + p { margin-top: 10px; }
+.review-checklist-card { display: grid; align-content: start; gap: 12px; }
+.review-checklist-card label { display: flex; gap: 10px; align-items: flex-start; color: var(--ink); line-height: 1.45; }
+.review-checklist-card input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--blue); flex: 0 0 auto; }
+.review-checklist-card-wide { grid-column: 1 / -1; }
 .review-link-group + .review-link-group { margin-top: 19px; padding-top: 18px; border-top: 1px solid var(--line); }
 .review-link-group h3 { margin: 0 0 10px; color: var(--ink); font-size: 1rem; }
 .review-link-group ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
@@ -631,6 +641,8 @@
   }
 
   .review-links-grid { grid-template-columns: 1fr; }
+  .review-checklist-layout { grid-template-columns: 1fr; }
+  .review-checklist-intro, .review-checklist-card-wide { grid-column: auto; }
 
   .facility-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
