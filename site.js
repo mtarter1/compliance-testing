@@ -50,6 +50,37 @@ const menuButton = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const brand = document.querySelector('.brand');
 const navActions = document.querySelector('.nav-actions');
+const isReviewPreview = window.location.pathname === '/review-071026' || window.location.pathname.startsWith('/review-071026/');
+const reviewBase = '/review-071026/';
+const reviewNavVersion = 'v=review-contact-page-20260805';
+const reviewPage = (page = '', hash = '') => `${reviewBase}${page}?${reviewNavVersion}${hash}`;
+const previewHref = (href) => {
+  if (!isReviewPreview) return href;
+  const reviewRoutes = {
+    '/': reviewPage(),
+    '/#contact': reviewPage('contact.html'),
+    '/about.html': reviewPage('about.html'),
+    '/brand.html': reviewPage('brand.html'),
+    '/blog.html': reviewPage('blog.html'),
+    '/contact.html': reviewPage('contact.html'),
+    '/industry-links.html': reviewPage('industry-links.html'),
+    '/services/': reviewPage('services.html'),
+    '/services/monthly-inspections.html': reviewPage('services/monthly-inspections.html'),
+    '/services/compliance-testing.html': reviewPage('services.html', '#compliance-testing'),
+    '/services/third-party-testing.html': reviewPage('services.html', '#third-party-reporting'),
+    '/services/hydrostatic-testing.html': reviewPage('services.html', '#hydrostatic-testing'),
+    '/services/service-repair.html': reviewPage('parts.html'),
+    '/services/operator-training.html': reviewPage('services/operator-training.html'),
+    '/solutions/': reviewPage('', '#solutions'),
+    '/solutions/independent-owners.html': reviewPage('solutions/independent-owners.html'),
+    '/solutions/growing-portfolios.html': reviewPage('solutions/growing-portfolios.html'),
+    '/solutions/critical-fueling.html': reviewPage('solutions/critical-fueling.html'),
+    '/parts/': reviewPage('parts.html'),
+    '/parts/index.html': reviewPage('parts.html'),
+  };
+  return reviewRoutes[href] || href;
+};
+const contactHref = isReviewPreview ? reviewPage('contact.html') : previewHref('/#contact');
 
 if (brand && !brand.querySelector('.brand-name')) {
   brand.insertAdjacentHTML('beforeend', '<span class="brand-name">Compliance Testing Services</span>');
@@ -58,24 +89,47 @@ if (brand && !brand.querySelector('.brand-name')) {
 if (navActions) {
   navActions.innerHTML = `
     <a class="button secondary" href="tel:+17748725151">(774) 872-5151</a>
-    <a class="button" href="/#contact">Request service</a>`;
+    <a class="button" href="${contactHref}">Request service</a>`;
 }
 
 if (navLinks) {
-  navLinks.innerHTML = `
+  navLinks.innerHTML = isReviewPreview
+    ? `
+    <div class="nav-group">
+      <a class="nav-parent" href="${reviewPage('services.html')}">Services</a>
+      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open Services menu">&#8964;</button>
+      <div class="dropdown-menu">
+        <a href="${reviewPage('services/monthly-inspections.html')}">Monthly Inspections</a>
+        <a href="${reviewPage('services.html', '#compliance-testing')}">Testing</a>
+        <a href="${reviewPage('parts.html')}">Repairs &amp; Parts</a>
+        <a href="${reviewPage('services/operator-training.html')}">Operator Training</a>
+      </div>
+    </div>
+    <div class="nav-group">
+      <a class="nav-parent" href="${reviewPage('', '#solutions')}">Who we serve</a>
+      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open Who we serve menu">&#8964;</button>
+      <div class="dropdown-menu">
+        <a href="${reviewPage('solutions/independent-owners.html')}">Independent Owners</a>
+        <a href="${reviewPage('solutions/growing-portfolios.html')}">Growing Portfolios</a>
+        <a href="${reviewPage('solutions/critical-fueling.html')}">Critical Fueling Operations</a>
+      </div>
+    </div>
+    <a href="${reviewPage('about.html')}">About</a>
+    <a href="${reviewPage('blog.html')}">Blog</a>`
+    : `
     <div class="nav-group">
       <a class="nav-parent" href="/services/">Services</a>
-      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open Services menu">⌄</button>
+      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open Services menu">&#8964;</button>
       <div class="dropdown-menu">
         <a href="/services/monthly-inspections.html">Monthly Inspections</a>
         <a href="/services/compliance-testing.html">Testing</a>
-        <a href="/services/service-repair.html">Repairs &amp; Parts</a>
+        <a href="/parts/">Repairs &amp; Parts</a>
         <a href="/services/operator-training.html">Operator Training</a>
       </div>
     </div>
     <div class="nav-group">
       <a class="nav-parent" href="/solutions/">Who we serve</a>
-      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open Who we serve menu">⌄</button>
+      <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-label="Open Who we serve menu">&#8964;</button>
       <div class="dropdown-menu">
         <a href="/solutions/independent-owners.html">Independent Owners</a>
         <a href="/solutions/growing-portfolios.html">Growing Portfolios</a>
@@ -98,11 +152,17 @@ document.querySelectorAll('.nav-group').forEach((group) => {
   });
 });
 
-const solutionPages = {
+const publicSolutionPages = {
   '/solutions/independent-owners.html': 'Independent Owners',
   '/solutions/growing-portfolios.html': 'Growing Portfolios',
   '/solutions/critical-fueling.html': 'Critical Fueling Operations'
 };
+const reviewSolutionPages = {
+  '/review-071026/solutions/independent-owners.html': 'Independent Owners',
+  '/review-071026/solutions/growing-portfolios.html': 'Growing Portfolios',
+  '/review-071026/solutions/critical-fueling.html': 'Critical Fueling Operations'
+};
+const solutionPages = isReviewPreview ? reviewSolutionPages : publicSolutionPages;
 if (solutionPages[window.location.pathname]) {
   const hero = document.querySelector('main .page-hero');
   if (hero) {
@@ -110,7 +170,7 @@ if (solutionPages[window.location.pathname]) {
     switcher.className = 'container audience-switcher';
     switcher.setAttribute('aria-label', 'Who we serve');
     switcher.innerHTML = Object.entries(solutionPages).map(([href, label]) =>
-      `<a href="${href}"${href === window.location.pathname ? ' aria-current="page"' : ''}>${label}</a>`
+      `<a href="${isReviewPreview ? `${href}?${reviewNavVersion}` : href}"${href === window.location.pathname ? ' aria-current="page"' : ''}>${label}</a>`
     ).join('');
     hero.insertAdjacentElement('afterend', switcher);
   }
@@ -232,7 +292,7 @@ if (stateFilter) {
     source.href = profile.source;
     cards.forEach((card, index) => {
       const [kicker, cardTitle, cardCopy, href, glyph] = profile.services[index];
-      card.href = href;
+      card.href = previewHref(href);
       card.querySelector('[data-card-kicker]').textContent = kicker;
       card.querySelector('[data-card-title]').textContent = cardTitle;
       card.querySelector('[data-card-copy]').textContent = cardCopy;
@@ -251,7 +311,7 @@ const serviceBrowser = document.querySelector('[data-state-filter]');
 if (serviceBrowser) {
   const partsPromo = document.createElement('aside');
   partsPromo.className = 'parts-promo';
-  partsPromo.innerHTML = '<span class="service-glyph glyph-nozzle" aria-hidden="true"></span><div><strong>Need a nozzle, filter, swivel, breakaway, or other replacement part?</strong><p>See the types of parts CTS keeps available for service and repair work.</p></div><a class="button secondary" href="/parts/">View parts</a>';
+  partsPromo.innerHTML = `<span class="service-glyph glyph-nozzle" aria-hidden="true"></span><div><strong>Need a nozzle, filter, swivel, breakaway, or other replacement part?</strong><p>See the types of parts CTS keeps available for service and repair work.</p></div><a class="button secondary" href="${previewHref('/parts/')}">View parts</a>`;
   serviceBrowser.insertAdjacentElement('afterend', partsPromo);
   const stateButtons = [...serviceBrowser.querySelectorAll('.state-button')];
   const tankFilter = document.createElement('div');
@@ -357,7 +417,15 @@ if (serviceBrowser) {
     const type = tankTypeFor(name);
     return type === 'both' || type === currentTank;
   };
-  const featuredServiceMarkup = (service) => `<article class="service-feature catalog-featured-card"><div class="service-feature-top"><span class="service-glyph glyph-${service.glyph}" aria-hidden="true"></span><span class="service-kicker">${service.category}</span></div><span class="service-frequency">${service.frequency}</span><h3>${service.title}</h3><p>${service.copy}</p><div class="service-state-tags" aria-label="Available states">${service.states.map((item) => `<span>${stateLabels[item]}</span>`).join('')}</div><a class="text-link" href="${service.href}">Explore service →</a></article>`;
+  const reviewServiceExplorePages = new Set([
+    '/services/monthly-inspections.html',
+    '/services/service-repair.html',
+    '/services/operator-training.html',
+  ]);
+  const serviceExploreLink = (service) => (!isReviewPreview || reviewServiceExplorePages.has(service.href))
+    ? `<a class="text-link" href="${previewHref(service.href)}">Explore service →</a>`
+    : '';
+  const featuredServiceMarkup = (service) => `<article class="service-feature catalog-featured-card"><div class="service-feature-top"><span class="service-glyph glyph-${service.glyph}" aria-hidden="true"></span><span class="service-kicker">${service.category}</span></div><span class="service-frequency">${service.frequency}</span><h3>${service.title}</h3><p>${service.copy}</p><div class="service-state-tags" aria-label="Available states">${service.states.map((item) => `<span>${stateLabels[item]}</span>`).join('')}</div>${serviceExploreLink(service)}</article>`;
   const serviceSelectorMarkup = (service) => `<button class="catalog-selector${service.title === selectedServiceTitle ? ' is-selected' : ''}" type="button" data-service-title="${service.title}" aria-pressed="${service.title === selectedServiceTitle}"><span class="service-glyph glyph-${service.glyph}" aria-hidden="true"></span><span><small>${service.category}</small><strong>${service.title}</strong></span></button>`;
 
   const renderServices = () => {
