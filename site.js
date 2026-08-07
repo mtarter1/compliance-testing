@@ -42,6 +42,7 @@
 const reviewBase = '/review-071026/';
 const isReviewPreview = window.location.pathname === reviewBase.slice(0, -1) || window.location.pathname.startsWith(reviewBase);
 const analyticsOptOutKey = 'cts_analytics_opt_out';
+const analyticsTrafficKey = 'cts_analytics_traffic_type';
 const analyticsParams = new URLSearchParams(window.location.search);
 const safeStorageGet = (storage, key) => {
   try {
@@ -65,8 +66,17 @@ if (analyticsParams.get('analytics') === 'on') {
     window.localStorage.removeItem(analyticsOptOutKey);
   } catch (error) {}
 }
+if (analyticsParams.get('traffic') === 'internal' || analyticsParams.get('analytics') === 'internal') {
+  safeStorageSet(window.localStorage, analyticsTrafficKey, 'internal');
+}
+if (analyticsParams.get('traffic') === 'external' || analyticsParams.get('analytics') === 'external') {
+  try {
+    window.localStorage.removeItem(analyticsTrafficKey);
+  } catch (error) {}
+}
 
 const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+const trafficType = safeStorageGet(window.localStorage, analyticsTrafficKey) === 'internal' ? 'internal' : 'external';
 const isBotLike = (() => {
   const userAgent = navigator.userAgent || '';
   return Boolean(
@@ -83,6 +93,7 @@ const analyticsDisabled = isReviewPreview ||
 const analyticsContext = {
   site: 'compliance-testing-services',
   review_preview: isReviewPreview,
+  traffic_type: trafficType,
   page_path: window.location.pathname,
   page_url: window.location.href,
 };
@@ -100,7 +111,6 @@ if (!analyticsDisabled) {
     ui_host: 'https://us.posthog.com',
     defaults: '2026-05-30',
     person_profiles: 'identified_only',
-    disable_session_recording: true,
     loaded: (client) => {
       client.register(analyticsContext);
     },
