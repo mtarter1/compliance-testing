@@ -39,19 +39,78 @@
     (e.__SV = 1));
 })(document, window.posthog || []);
 
-posthog.init('phc_CHFUtFcUJoQ5n8txL8B3PsK6N7Vi3DeAdi83qqkRBPjr', {
-  api_host: 'https://t.compliance-testing.com',
-  ui_host: 'https://us.posthog.com',
-  defaults: '2026-05-30',
-  person_profiles: 'identified_only',
-});
+const reviewBase = '/review-071026/';
+const isReviewPreview = window.location.pathname === reviewBase.slice(0, -1) || window.location.pathname.startsWith(reviewBase);
+const analyticsOptOutKey = 'cts_analytics_opt_out';
+const analyticsParams = new URLSearchParams(window.location.search);
+const safeStorageGet = (storage, key) => {
+  try {
+    return storage.getItem(key);
+  } catch (error) {
+    return null;
+  }
+};
+const safeStorageSet = (storage, key, value) => {
+  try {
+    storage.setItem(key, value);
+  } catch (error) {
+    return null;
+  }
+  return value;
+};
+
+if (analyticsParams.get('analytics') === 'off') safeStorageSet(window.localStorage, analyticsOptOutKey, '1');
+if (analyticsParams.get('analytics') === 'on') {
+  try {
+    window.localStorage.removeItem(analyticsOptOutKey);
+  } catch (error) {}
+}
+
+const isLocalHost = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+const isBotLike = (() => {
+  const userAgent = navigator.userAgent || '';
+  return Boolean(
+    navigator.webdriver ||
+    /bot|crawler|spider|headless|lighthouse|pagespeed|chrome-lighthouse|playwright|puppeteer|selenium|webdriver/i.test(userAgent),
+  );
+})();
+const analyticsDisabled = isReviewPreview ||
+  isLocalHost ||
+  safeStorageGet(window.localStorage, analyticsOptOutKey) === '1' ||
+  navigator.doNotTrack === '1' ||
+  navigator.doNotTrack === 'yes' ||
+  isBotLike;
+const analyticsContext = {
+  site: 'compliance-testing-services',
+  review_preview: isReviewPreview,
+  page_path: window.location.pathname,
+  page_url: window.location.href,
+};
+const trackAnalytics = (eventName, properties = {}) => {
+  if (analyticsDisabled || typeof window.posthog?.capture !== 'function') return;
+  window.posthog.capture(eventName, {
+    ...analyticsContext,
+    ...properties,
+  });
+};
+
+if (!analyticsDisabled) {
+  posthog.init('phc_CHFUtFcUJoQ5n8txL8B3PsK6N7Vi3DeAdi83qqkRBPjr', {
+    api_host: 'https://t.compliance-testing.com',
+    ui_host: 'https://us.posthog.com',
+    defaults: '2026-05-30',
+    person_profiles: 'identified_only',
+    disable_session_recording: true,
+    loaded: (client) => {
+      client.register(analyticsContext);
+    },
+  });
+}
 
 const menuButton = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
 const brand = document.querySelector('.brand');
 const navActions = document.querySelector('.nav-actions');
-const isReviewPreview = window.location.pathname === '/review-071026' || window.location.pathname.startsWith('/review-071026/');
-const reviewBase = '/review-071026/';
 const reviewNavVersion = 'v=review-contact-page-20260805';
 const reviewPage = (page = '', hash = '') => `${reviewBase}${page}?${reviewNavVersion}${hash}`;
 const previewHref = (href) => {
@@ -150,6 +209,84 @@ document.querySelectorAll('.nav-group').forEach((group) => {
     group.classList.toggle('open', willOpen);
     toggle.setAttribute('aria-expanded', String(willOpen));
   });
+});
+
+const labelFor = (element) => (element.getAttribute('aria-label') || element.textContent || '')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .slice(0, 140);
+const locationFor = (element) => {
+  const section = element.closest('section');
+  if (section) return section.id || section.className.split(/\s+/).find(Boolean) || 'section';
+  if (element.closest('.site-header')) return 'header';
+  if (element.closest('.site-footer')) return 'footer';
+  return 'page';
+};
+document.addEventListener('click', (event) => {
+  const target = event.target.closest('a, button');
+  if (!target || target.matches('.menu-toggle, .nav-menu-toggle')) return;
+  const href = target.getAttribute('href') || '';
+  const label = labelFor(target);
+  if (!label && !href) return;
+
+  if (/^tel:/i.test(href)) {
+    trackAnalytics('CTS Phone Click', { label, href, location: locationFor(target) });
+    return;
+  }
+
+  if (/^mailto:/i.test(href)) {
+    trackAnalytics('CTS Email Click', { label, href, location: locationFor(target) });
+    return;
+  }
+
+  if (target.closest('.service-feature-grid, .catalog-selector-grid, .service-browser, .state-filter, .cadence-map')) {
+    trackAnalytics('CTS Service Click', {
+      label,
+      href,
+      location: locationFor(target),
+      section: target.closest('section')?.id || '',
+    });
+    return;
+  }
+
+  if (target.closest('.tab-set')) {
+    trackAnalytics('CTS Segment Click', {
+      label,
+      href,
+      location: locationFor(target),
+      section: target.closest('section')?.id || '',
+    });
+    return;
+  }
+
+  if (target.closest('.article-row, .article-stack, .article-featured-layout')) {
+    trackAnalytics('CTS Article Click', {
+      label,
+      href,
+      location: locationFor(target),
+      section: target.closest('section')?.id || '',
+    });
+    return;
+  }
+
+  if (target.closest('.contact-grid, .cta-strip, .hero-actions, .nav-actions, .nav-links, .contact-page-form, .inquiry-form')) {
+    trackAnalytics('CTS CTA Click', {
+      label,
+      href,
+      location: locationFor(target),
+      section: target.closest('section')?.id || '',
+    });
+    return;
+  }
+
+  if (target.matches('.button, .text-link, .brand, .nav-links a')) {
+    trackAnalytics('CTS Navigation Click', {
+      label,
+      href,
+      location: locationFor(target),
+      section: target.closest('section')?.id || '',
+    });
+  }
 });
 
 const publicSolutionPages = {
@@ -475,4 +612,13 @@ if (serviceBrowser) {
 const successBanner = document.querySelector('.success-banner');
 if (successBanner && new URLSearchParams(window.location.search).get('submitted') === 'true') {
   successBanner.classList.add('visible');
+  const submissionKey = `cts_contact_submitted:${window.location.pathname}`;
+  if (typeof window.sessionStorage !== 'undefined' && window.sessionStorage.getItem(submissionKey) !== '1') {
+    trackAnalytics('CTS Contact Form Submitted', {
+      form_type: window.location.pathname.includes('/contact') ? 'dedicated-contact' : 'homepage-inline',
+    });
+    try {
+      window.sessionStorage.setItem(submissionKey, '1');
+    } catch (error) {}
+  }
 }
