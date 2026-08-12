@@ -257,6 +257,12 @@
   background: rgba(97, 220, 164, .11);
 }
 
+.review-home .process-icon img {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
 .review-home .process-icon::before,
 .review-home .process-icon::after {
   position: absolute;
