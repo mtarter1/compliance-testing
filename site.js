@@ -458,7 +458,7 @@ const serviceBrowser = document.querySelector('[data-state-filter]');
 if (serviceBrowser) {
   const partsPromo = document.createElement('aside');
   partsPromo.className = 'parts-promo';
-  partsPromo.innerHTML = `<span class="service-glyph glyph-nozzle" aria-hidden="true"></span><div><strong>Need a nozzle, filter, swivel, breakaway, or other replacement part?</strong><p>See the types of parts CTS keeps available for service and repair work.</p></div><a class="button secondary" href="${previewHref('/parts/')}">View parts</a>`;
+  partsPromo.innerHTML = `<span class="service-glyph service-glyph-asset parts-promo-icon" aria-hidden="true"><img src="/assets/icons/services/replacement-parts.svg" alt=""></span><div><strong>Need a nozzle, filter, swivel, breakaway, or other replacement part?</strong><p>See the types of parts CTS keeps available for service and repair work.</p></div><a class="button secondary" href="${previewHref('/parts/')}">View parts</a>`;
   serviceBrowser.insertAdjacentElement('afterend', partsPromo);
   const stateButtons = [...serviceBrowser.querySelectorAll('.state-button')];
   const tankFilter = document.createElement('div');
@@ -516,6 +516,13 @@ if (serviceBrowser) {
     { title: 'Service, Repair & Retesting', category: 'UST + AST Systems', frequency: 'As needed', states: allStates, copy: 'Responsive support when an inspection, test, alarm, or daily operation uncovers an equipment issue, including corrective work and retesting.', href: '/services/service-repair.html', glyph: 'repair' },
     { title: 'Operator Training', category: 'State Operator Programs', frequency: 'Initial & refresher', states: allStates, copy: 'Practical, site-aware guidance that helps operators understand responsibilities, maintain records, and respond confidently.', href: '/services/operator-training.html', glyph: 'training' }
   ];
+  const serviceIconFiles = {
+    calendar: 'home/monthly-inspections.svg', gauge: 'home/compliance-testing.svg', testing: 'home/compliance-testing.svg',
+    containment: 'services/containment-testing.svg', pipeline: 'services/tank-line-testing.svg', corrosion: 'services/cathodic-protection.svg',
+    inspection: 'services/third-party-inspection.svg', certificate: 'services/compliance-certification.svg', document: 'services/certificate-of-compliance.svg',
+    checklist: 'services/erp-certification.svg', ast: 'services/aboveground-tank.svg', repair: 'home/service-repair.svg', training: 'home/operator-training.svg'
+  };
+  const serviceIconMarkup = (glyph) => `<span class="service-glyph service-glyph-asset" aria-hidden="true"><img src="/assets/icons/${serviceIconFiles[glyph] || serviceIconFiles.testing}" alt=""></span>`;
 
   services.forEach((service) => {
     if (!service.tanks) service.tanks = service.title.includes('Aboveground') ? ['ast'] : service.title.includes('Service, Repair') || service.title.includes('Operator Training') ? ['ust', 'ast'] : ['ust'];
@@ -572,8 +579,8 @@ if (serviceBrowser) {
   const serviceExploreLink = (service) => (!isReviewPreview || reviewServiceExplorePages.has(service.href))
     ? `<a class="text-link" href="${previewHref(service.href)}">Explore service →</a>`
     : '';
-  const featuredServiceMarkup = (service) => `<article class="service-feature catalog-featured-card"><div class="service-feature-top"><span class="service-glyph glyph-${service.glyph}" aria-hidden="true"></span><span class="service-kicker">${service.category}</span></div><span class="service-frequency">${service.frequency}</span><h3>${service.title}</h3><p>${service.copy}</p><div class="service-state-tags" aria-label="Available states">${service.states.map((item) => `<span>${stateLabels[item]}</span>`).join('')}</div>${serviceExploreLink(service)}</article>`;
-  const serviceSelectorMarkup = (service) => `<button class="catalog-selector${service.title === selectedServiceTitle ? ' is-selected' : ''}" type="button" data-service-title="${service.title}" aria-pressed="${service.title === selectedServiceTitle}"><span class="service-glyph glyph-${service.glyph}" aria-hidden="true"></span><span><small>${service.category}</small><strong>${service.title}</strong></span></button>`;
+  const featuredServiceMarkup = (service) => `<article class="service-feature catalog-featured-card"><div class="service-feature-top">${serviceIconMarkup(service.glyph)}<span class="service-kicker">${service.category}</span></div><span class="service-frequency">${service.frequency}</span><h3>${service.title}</h3><p>${service.copy}</p><div class="service-state-tags" aria-label="Available states">${service.states.map((item) => `<span>${stateLabels[item]}</span>`).join('')}</div>${serviceExploreLink(service)}</article>`;
+  const serviceSelectorMarkup = (service) => `<button class="catalog-selector${service.title === selectedServiceTitle ? ' is-selected' : ''}" type="button" data-service-title="${service.title}" aria-pressed="${service.title === selectedServiceTitle}">${serviceIconMarkup(service.glyph)}<span><small>${service.category}</small><strong>${service.title}</strong></span></button>`;
 
   const renderServices = () => {
     const visible = services.filter((service) => (currentState === 'all' || service.states.includes(currentState)) && (currentTank === 'all' || service.tanks.includes(currentTank)));
@@ -591,7 +598,7 @@ if (serviceBrowser) {
     } else {
       catalog.className = 'cadence-map';
       const lanes = cadenceViews[state].map(([cadence, items]) => [cadence, items.filter(([name]) => itemMatchesTank(name))]).filter(([, items]) => items.length);
-      catalog.innerHTML = lanes.length ? lanes.map(([cadence, items]) => `<section class="cadence-lane"><div class="cadence-label">${cadence}</div><div class="cadence-items">${items.map(([name]) => { const type = tankTypeFor(name); const glyph = glyphForCadence(name); const program = programForCadence(name, type); return `<div class="cadence-item tank-${type}"><span class="service-glyph glyph-${glyph}" aria-hidden="true"></span><span>${name}</span><small>${program}</small></div>`; }).join('')}</div></section>`).join('') : '<p class="empty-services">No tank-type-specific services are listed for this state yet. Contact CTS to confirm the scope for your system.</p>';
+      catalog.innerHTML = lanes.length ? lanes.map(([cadence, items]) => `<section class="cadence-lane"><div class="cadence-label">${cadence}</div><div class="cadence-items">${items.map(([name]) => { const type = tankTypeFor(name); const glyph = glyphForCadence(name); const program = programForCadence(name, type); return `<div class="cadence-item tank-${type}">${serviceIconMarkup(glyph)}<span>${name}</span><small>${program}</small></div>`; }).join('')}</div></section>`).join('') : '<p class="empty-services">No tank-type-specific services are listed for this state yet. Contact CTS to confirm the scope for your system.</p>';
     }
     const [heading, description] = stateProfiles[state];
     stateTitle.textContent = heading;

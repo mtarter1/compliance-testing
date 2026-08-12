@@ -1195,7 +1195,14 @@
 }
 
 .blog-preview-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+}
+
+.blog-preview-card .button {
+  align-self: flex-start;
+  margin-top: auto;
 }
 
 .review-card-image {
