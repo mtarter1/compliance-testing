@@ -99,6 +99,27 @@
   box-shadow: 0 1px 0 rgba(12, 74, 47, .03);
 }
 
+.review-home .faq-column {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+@media (max-width: 760px) {
+  .review-home .faq-grid {
+    display: grid;
+  }
+
+  .review-home .faq-column {
+    display: contents;
+  }
+
+  .review-home .faq-item-1 { order: 1; }
+  .review-home .faq-item-2 { order: 2; }
+  .review-home .faq-item-3 { order: 3; }
+  .review-home .faq-item-4 { order: 4; }
+}
+
 .review-home input:focus,
 .review-home textarea:focus {
   border-color: var(--blue);
