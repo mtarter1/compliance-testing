@@ -466,6 +466,8 @@ main > .audience-switcher + .section { padding-top: 42px; }
 .parts-callout .button { margin-top: 8px; }
 .parts-promo { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; margin-top: 16px; padding: 16px 18px; border: 1px solid #c8efe0; border-radius: var(--radius); background: linear-gradient(90deg, var(--green-soft), var(--white)); }
 .parts-promo .service-glyph { margin: 0; }
+.parts-promo .parts-promo-icon { flex-basis: 52px; width: 52px; height: 52px; }
+.parts-promo .parts-promo-icon img { width: 40px; height: 40px; }
 .parts-promo strong { display: block; color: var(--navy); font-size: 1rem; }
 .parts-promo p { margin: 3px 0 0; color: var(--muted); font-size: .86rem; }
 .solution-placeholder { margin-top: 20px; min-height: 140px; display: grid; place-items: center; padding: 28px; border: 1px dashed rgba(84,230,165,.55); border-radius: var(--radius); background: rgba(255,255,255,.05); color: #cbd4ea; text-align: center; }
