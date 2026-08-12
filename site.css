@@ -261,6 +261,8 @@ h3 { font-size: 1.35rem; }
 .service-feature-top { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
 .service-kicker { display: inline-block; color: var(--blue); font-size: .72rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
 .service-glyph { position: relative; flex: 0 0 46px; width: 46px; height: 46px; border: 1px solid #c8efe0; border-radius: 13px; background: var(--green-soft); }
+.service-glyph-asset { display: grid; place-items: center; }
+.service-glyph-asset img { display: block; width: 34px; height: 34px; }
 .service-glyph::before, .service-glyph::after { content: ""; position: absolute; }
 .glyph-calendar::before { inset: 12px 10px 9px; border: 2px solid var(--blue); border-radius: 3px; }
 .glyph-calendar::after { left: 10px; right: 10px; top: 18px; height: 2px; background: var(--blue); box-shadow: 6px 7px 0 -0.5px var(--green), 13px 7px 0 -0.5px var(--green); }
@@ -297,8 +299,11 @@ h3 { font-size: 1.35rem; }
 
 .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; border-radius: var(--radius); overflow: hidden; background: rgba(255,255,255,.15); }
 .process-step { padding: 25px; background: rgba(255,255,255,.06); }
+.process-step-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.process-icon { display: grid; flex: 0 0 52px; width: 52px; height: 52px; place-items: center; border: 1px solid rgba(84,230,165,.34); border-radius: 14px; background: rgba(84,230,165,.09); }
+.process-icon img { display: block; width: 38px; height: 38px; }
 .process-step b { color: var(--green); }
-.process-step h3 { margin: 18px 0 8px; font-size: 1.18rem; }
+.process-step h3 { margin: 20px 0 8px; font-size: 1.18rem; }
 .process-step p { margin: 0; color: #cbd4ea; font-size: .94rem; }
 
 .tab-set { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 24px; }
