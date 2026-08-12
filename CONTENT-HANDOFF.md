@@ -32,11 +32,11 @@ Avoid changing:
 
 ## Contact form
 
-Requests are sent through FormSubmit to `contact@compliance-testing.com`.
+Requests are sent through Formspree using the form's unique endpoint.
 
-After the first submission following deployment, open the FormSubmit activation email in that inbox and approve the form. FormSubmit retains submissions made before activation for a limited period.
+After creating or updating the form in Formspree, confirm the destination inbox is verified and test one submission from the live site.
 
-The form includes required contact fields, a honeypot field, and FormSubmit's CAPTCHA protection. Do not remove the hidden fields beginning with an underscore.
+The form includes required contact fields, a honeypot field, and hidden redirect/metadata fields. Do not remove the hidden fields beginning with an underscore unless the form implementation changes with it.
 
 ## Publishing checklist
 
