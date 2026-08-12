@@ -1055,6 +1055,54 @@
   margin-top: 18px;
 }
 
+.type-specimens {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.type-specimen {
+  display: grid;
+  gap: 4px;
+}
+
+.type-specimen small {
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.type-specimen-headline strong {
+  color: var(--navy);
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  font-weight: 800;
+  line-height: 1.08;
+}
+
+.font-card .type-specimen-body p {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 450;
+  line-height: 1.55;
+}
+
+.type-specimen-button span {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 42px;
+  align-items: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--blue);
+  color: var(--white);
+  font-size: .92rem;
+  font-weight: 800;
+}
+
 .font-meta span,
 .brand-rule-list span {
   display: inline-flex;
