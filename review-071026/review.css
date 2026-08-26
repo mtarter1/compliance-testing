@@ -411,6 +411,10 @@
   align-items: start;
 }
 
+.about-review > .page-hero + .about-history-section {
+  padding-bottom: 12px;
+}
+
 .about-history-copy {
   max-width: 760px;
 }
